@@ -19,12 +19,14 @@ package com.dmitrymalkovich.android.popularmoviesapp;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.support.v7.widget.RecyclerView;
+//import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dmitrymalkovich.android.popularmoviesapp.data.MovieContract;
 import com.dmitrymalkovich.android.popularmoviesapp.network.Movie;
@@ -34,7 +36,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MovieListAdapter
@@ -127,9 +129,9 @@ public class MovieListAdapter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        @Bind(R.id.thumbnail)
+        @BindView(R.id.thumbnail)
         ImageView mThumbnailView;
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         TextView mTitleView;
         public Movie mMovie;
 

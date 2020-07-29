@@ -18,20 +18,26 @@ package com.dmitrymalkovich.android.popularmoviesapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 import android.database.Cursor;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dmitrymalkovich.android.popularmoviesapp.data.MovieContract;
 import com.dmitrymalkovich.android.popularmoviesapp.network.Movie;
@@ -41,7 +47,8 @@ import com.dmitrymalkovich.android.popularmoviesapp.details.MovieDetailFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+//import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -63,10 +70,10 @@ public class MovieListActivity extends AppCompatActivity implements LoaderManage
     private MovieListAdapter mAdapter;
     private String mSortBy = FetchMoviesTask.MOST_POPULAR;
 
-    @Bind(R.id.movie_list)
+    @BindView(R.id.movie_list)
     RecyclerView mRecyclerView;
-    @Bind(R.id.toolbar)
-    Toolbar mToolbar;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,7 +229,7 @@ public class MovieListActivity extends AppCompatActivity implements LoaderManage
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> cursorLoader) {
         // Not used
     }
 

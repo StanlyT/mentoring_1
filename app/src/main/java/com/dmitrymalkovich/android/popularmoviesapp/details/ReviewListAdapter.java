@@ -16,11 +16,13 @@
 
 package com.dmitrymalkovich.android.popularmoviesapp.details;
 
-import android.support.v7.widget.RecyclerView;
+//import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dmitrymalkovich.android.popularmoviesapp.R;
 import com.dmitrymalkovich.android.popularmoviesapp.network.Review;
@@ -28,7 +30,7 @@ import com.dmitrymalkovich.android.popularmoviesapp.network.Review;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.ViewHolder> {
@@ -78,9 +80,9 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        @Bind(R.id.review_content)
+        @BindView(R.id.review_content)
         TextView mContentView;
-        @Bind(R.id.review_author)
+        @BindView(R.id.review_author)
         TextView mAuthorView;
         public Review mReview;
 

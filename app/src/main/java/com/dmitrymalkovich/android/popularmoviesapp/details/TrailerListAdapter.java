@@ -18,12 +18,14 @@ package com.dmitrymalkovich.android.popularmoviesapp.details;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.widget.RecyclerView;
+//import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dmitrymalkovich.android.popularmoviesapp.R;
 import com.dmitrymalkovich.android.popularmoviesapp.network.Trailer;
@@ -31,8 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.ViewHolder> {
@@ -101,7 +102,7 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        @Bind(R.id.trailer_thumbnail)
+        @BindView(R.id.trailer_thumbnail)
         ImageView mThumbnailView;
         public Trailer mTrailer;
 

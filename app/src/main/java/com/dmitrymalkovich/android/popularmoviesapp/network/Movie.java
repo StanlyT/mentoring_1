@@ -19,8 +19,10 @@ package com.dmitrymalkovich.android.popularmoviesapp.network;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+//import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.dmitrymalkovich.android.popularmoviesapp.R;
 import com.google.gson.annotations.SerializedName;

@@ -16,21 +16,56 @@
 
 package com.dmitrymalkovich.android.popularmoviesapp.details;
 
+//import android.app.Activity;
+//import android.content.ContentValues;
+//import android.content.Intent;
+//import android.database.Cursor;
+//import android.graphics.Bitmap;
+//import android.net.Uri;
+//import android.os.AsyncTask;
+//import android.support.annotation.Nullable;
+//import android.support.design.widget.CollapsingToolbarLayout;
+//import android.os.Bundle;
+//import androidx.core.app.Fragment;
+//import androidx.core.view.MenuItemCompat;
+//import android.support.v7.widget.LinearLayoutManager;
+//import android.support.v7.widget.RecyclerView;
+//import android.support.v7.widget.ShareActionProvider;
+//import android.view.LayoutInflater;
+//import android.view.Menu;
+//import android.view.MenuInflater;
+//import android.view.MenuItem;
+//import android.view.View;
+//import android.view.ViewGroup;
+//import android.widget.Button;
+//import android.widget.ImageView;
+//import android.widget.TextView;
+//
+//import com.dmitrymalkovich.android.popularmoviesapp.data.MovieContract;
+import com.dmitrymalkovich.android.popularmoviesapp.data.MovieContract;
+import com.dmitrymalkovich.android.popularmoviesapp.network.*;
+import com.dmitrymalkovich.android.popularmoviesapp.MovieListActivity;
+import com.dmitrymalkovich.android.popularmoviesapp.R;
+//import com.dmitrymalkovich.android.popularmoviesapp.network.Review;
+//import com.dmitrymalkovich.android.popularmoviesapp.network.Trailer;
+import com.squareup.picasso.Picasso;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//import butterknife.Bind;
+//import butterknife.ButterKnife;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+
+import android.graphics.drawable.AnimatedImageDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,18 +76,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dmitrymalkovich.android.popularmoviesapp.data.MovieContract;
-import com.dmitrymalkovich.android.popularmoviesapp.network.Movie;
-import com.dmitrymalkovich.android.popularmoviesapp.MovieListActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.dmitrymalkovich.android.popularmoviesapp.R;
-import com.dmitrymalkovich.android.popularmoviesapp.network.Review;
-import com.dmitrymalkovich.android.popularmoviesapp.network.Trailer;
-import com.squareup.picasso.Picasso;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindDrawable;
+import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 /**
@@ -79,30 +118,30 @@ public class MovieDetailFragment extends Fragment implements FetchTrailersTask.L
     private ReviewListAdapter mReviewListAdapter;
     private ShareActionProvider mShareActionProvider;
 
-    @Bind(R.id.trailer_list)
+    @BindView(R.id.trailer_list)
     RecyclerView mRecyclerViewForTrailers;
-    @Bind(R.id.review_list)
+    @BindView(R.id.review_list)
     RecyclerView mRecyclerViewForReviews;
 
-    @Bind(R.id.movie_title)
+    @BindView(R.id.movie_title)
     TextView mMovieTitleView;
-    @Bind(R.id.movie_overview)
+    @BindView(R.id.movie_overview)
     TextView mMovieOverviewView;
-    @Bind(R.id.movie_release_date)
+    @BindView(R.id.movie_release_date)
     TextView mMovieReleaseDateView;
-    @Bind(R.id.movie_user_rating)
+    @BindView(R.id.movie_user_rating)
     TextView mMovieRatingView;
-    @Bind(R.id.movie_poster)
+    @BindView(R.id.movie_poster)
     ImageView mMoviePosterView;
 
-    @Bind(R.id.button_watch_trailer)
+    @BindView(R.id.button_watch_trailer)
     Button mButtonWatchTrailer;
-    @Bind(R.id.button_mark_as_favorite)
+    @BindView(R.id.button_mark_as_favorite)
     Button mButtonMarkAsFavorite;
-    @Bind(R.id.button_remove_from_favorites)
+    @BindView(R.id.button_remove_from_favorites)
     Button mButtonRemoveFromFavorites;
 
-    @Bind({R.id.rating_first_star, R.id.rating_second_star, R.id.rating_third_star,
+    @BindViews({R.id.rating_first_star, R.id.rating_second_star, R.id.rating_third_star,
             R.id.rating_fourth_star, R.id.rating_fifth_star})
     List<ImageView> ratingStarViews;
 

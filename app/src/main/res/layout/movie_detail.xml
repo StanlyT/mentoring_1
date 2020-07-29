@@ -112,14 +112,14 @@
             android:textColor="@color/text_color_for_movie_overview"
             android:textIsSelectable="true" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trailer_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/trailer_list_vertical_padding"
             tools:listitem="@layout/trailer_list_content" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/review_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

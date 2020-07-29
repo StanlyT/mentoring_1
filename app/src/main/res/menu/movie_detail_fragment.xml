@@ -20,6 +20,6 @@
         android:id="@+id/share_trailer"
         android:icon="@drawable/ic_share_black_24dp"
         android:title="@string/share_trailer"
-        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
         app:showAsAction="ifRoom" />
 </menu>
