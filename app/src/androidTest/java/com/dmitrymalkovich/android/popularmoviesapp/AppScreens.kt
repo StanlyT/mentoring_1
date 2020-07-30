@@ -21,8 +21,8 @@ class AppScreens : TestCase(){
                 isVisible()
 
         }
-            actionMenu{
-            isClickable()}
+//            actionMenu{
+//            isClickable()}
         }
 
     }
