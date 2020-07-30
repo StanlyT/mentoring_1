@@ -16,45 +16,13 @@
 
 package com.dmitrymalkovich.android.popularmoviesapp.details;
 
-//import android.app.Activity;
-//import android.content.ContentValues;
-//import android.content.Intent;
-//import android.database.Cursor;
-//import android.graphics.Bitmap;
-//import android.net.Uri;
-//import android.os.AsyncTask;
-//import android.support.annotation.Nullable;
-//import android.support.design.widget.CollapsingToolbarLayout;
-//import android.os.Bundle;
-//import androidx.core.app.Fragment;
-//import androidx.core.view.MenuItemCompat;
-//import android.support.v7.widget.LinearLayoutManager;
-//import android.support.v7.widget.RecyclerView;
-//import android.support.v7.widget.ShareActionProvider;
-//import android.view.LayoutInflater;
-//import android.view.Menu;
-//import android.view.MenuInflater;
-//import android.view.MenuItem;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.Button;
-//import android.widget.ImageView;
-//import android.widget.TextView;
-//
-//import com.dmitrymalkovich.android.popularmoviesapp.data.MovieContract;
 import com.dmitrymalkovich.android.popularmoviesapp.data.MovieContract;
 import com.dmitrymalkovich.android.popularmoviesapp.network.*;
 import com.dmitrymalkovich.android.popularmoviesapp.MovieListActivity;
 import com.dmitrymalkovich.android.popularmoviesapp.R;
-//import com.dmitrymalkovich.android.popularmoviesapp.network.Review;
-//import com.dmitrymalkovich.android.popularmoviesapp.network.Trailer;
+
 import com.squareup.picasso.Picasso;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import butterknife.Bind;
-//import butterknife.ButterKnife;
+
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -62,7 +30,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 
-import android.graphics.drawable.AnimatedImageDrawable;
+
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -83,13 +51,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dmitrymalkovich.android.popularmoviesapp.R;
+
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindDrawable;
+
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;

@@ -19,12 +19,8 @@ package com.dmitrymalkovich.android.popularmoviesapp.details;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-//import android.support.v7.widget.Toolbar;
-//import android.support.v7.app.AppCompatActivity;
-//importt android.support.v7.app.ActionBar;
 import android.view.MenuItem;
-//import androidx.widget.Toolbar;
-//
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -34,7 +30,7 @@ import com.dmitrymalkovich.android.popularmoviesapp.R;
 import butterknife.ButterKnife;
 
 import butterknife.BindView;
-//import butterknife.ButterKnife;
+
 
 /**
  * An activity representing a single Movie detail screen. This
