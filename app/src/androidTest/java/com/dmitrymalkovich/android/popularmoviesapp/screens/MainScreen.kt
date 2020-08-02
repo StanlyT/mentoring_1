@@ -9,20 +9,15 @@ import com.agoda.kakao.text.KTextView
 import com.dmitrymalkovich.android.popularmoviesapp.R
 import org.hamcrest.Matcher
 
+object MainScreen : Screen<MainScreen>() {
+    val actionMenu = KView { withId(R.id.menu_sort_by) }
+    val recyclerMainScreen: KRecyclerView = KRecyclerView({
+        withId(R.id.movie_list)
+    }, itemTypeBuilder = {
+        itemType(::Item)
+    })
 
-
-
-    class MainScreen : Screen<MainScreen>() {
-        val actionMenu = KView{withId(R.id.menu_sort_by)}
-        val recyclerMainScreen: KRecyclerView = KRecyclerView({
-            withId(R.id.movie_list)
-        }, itemTypeBuilder = {
-            itemType(::Item)
-        })
-
-        class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent) {
-            val title = KTextView(parent) { withId(R.id.title) }
-
-        }
-
+    class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent) {
+        val title = KTextView(parent) { withId(R.id.title) }
     }
+}
