@@ -19,13 +19,13 @@ package com.dmitrymalkovich.android.popularmoviesapp;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dmitrymalkovich.android.popularmoviesapp.data.MovieContract;
@@ -57,6 +57,7 @@ public class MovieListAdapter
         this.mCallbacks = callbacks;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -73,7 +74,7 @@ public class MovieListAdapter
     }
 
     @Override
-    public void onViewRecycled(ViewHolder holder) {
+    public void onViewRecycled(@NonNull ViewHolder holder) {
         super.onViewRecycled(holder);
         holder.cleanUp();
     }
@@ -114,12 +115,7 @@ public class MovieListAdapter
                         }
                 );
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCallbacks.open(movie, holder.getAdapterPosition());
-            }
-        });
+        holder.mView.setOnClickListener(v -> mCallbacks.open(movie, holder.getAdapterPosition()));
     }
 
     @Override
@@ -148,7 +144,6 @@ public class MovieListAdapter
             mThumbnailView.setVisibility(View.INVISIBLE);
             mTitleView.setVisibility(View.GONE);
         }
-
     }
 
     public void add(List<Movie> movies) {

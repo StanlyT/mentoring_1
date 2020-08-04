@@ -18,13 +18,13 @@ package com.dmitrymalkovich.android.popularmoviesapp.details;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dmitrymalkovich.android.popularmoviesapp.R;
@@ -33,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -53,6 +54,7 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
         mCallbacks = callbacks;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -87,12 +89,7 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
                 .config(Bitmap.Config.RGB_565)
                 .into(holder.mThumbnailView);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCallbacks.watch(trailer, holder.getAdapterPosition());
-            }
-        });
+        holder.mView.setOnClickListener(v -> mCallbacks.watch(trailer, holder.getAdapterPosition()));
     }
 
     @Override

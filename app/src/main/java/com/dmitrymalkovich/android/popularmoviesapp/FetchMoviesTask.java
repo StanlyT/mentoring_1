@@ -17,7 +17,6 @@
 package com.dmitrymalkovich.android.popularmoviesapp;
 
 import android.os.AsyncTask;
-//import android.support.annotation.StringDef;
 import android.util.Log;
 
 import androidx.annotation.StringDef;
@@ -61,7 +60,7 @@ public class FetchMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
     private final NotifyAboutTaskCompletionCommand mCommand;
     private
     @SORT_BY
-    String mSortBy = MOST_POPULAR;
+    String mSortBy;
 
     /**
      * Interface definition for a callback to be invoked when movies are loaded.
@@ -126,6 +125,7 @@ public class FetchMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
         try {
             Response<Movies> response = call.execute();
             Movies movies = response.body();
+            assert movies != null;
             return movies.getMovies();
 
         } catch (IOException e) {

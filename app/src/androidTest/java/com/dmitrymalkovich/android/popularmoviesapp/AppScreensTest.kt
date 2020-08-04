@@ -17,13 +17,12 @@ class AppScreensTest : TestCase() {
 
     @Rule
     @JvmField
-    var rule = ActivityTestRule(MovieListActivity::class.java)
+    var rule = ActivityTestRule(MovieListActivity::class.java, true)
 
     @Test
     fun mainScreenTest() {
         MainScreen {
             recyclerMainScreen.isDisplayed()
         }
-
     }
 }
