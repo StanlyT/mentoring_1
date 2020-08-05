@@ -11,10 +11,10 @@ import com.dmitrymalkovich.android.popularmoviesapp.R
 import org.hamcrest.Matcher
 
 class DetailMovieScreen : Screen<DetailMovieScreen>() {
-    val favoriteBotton = KButton{withId(R.id.button_mark_as_favorite)}
-    val removeFavoriteBotton = KButton{withId(R.id.button_mark_as_favorite)}
-    val watchButton = KButton{withId(R.id.button_watch_trailer)}
-    val trailerThumbnail = KView{withId(R.id.trailer_thumbnail)}
+    val favoriteBotton = KButton { withId(R.id.button_mark_as_favorite) }
+    val removeFavoriteBotton = KButton { withId(R.id.button_mark_as_favorite) }
+    val watchButton = KButton { withId(R.id.button_watch_trailer) }
+    val trailerThumbnail = KView { withId(R.id.trailer_thumbnail) }
 
     val recyclerTrailer: KRecyclerView = KRecyclerView({
         withId(R.id.trailer_list)
@@ -24,6 +24,5 @@ class DetailMovieScreen : Screen<DetailMovieScreen>() {
 
     class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent) {
         val title = KTextView(parent) { withId(R.id.title) }
-
     }
 }
