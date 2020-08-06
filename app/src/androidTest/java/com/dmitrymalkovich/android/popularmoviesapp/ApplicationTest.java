@@ -1,6 +1,7 @@
 package com.dmitrymalkovich.android.popularmoviesapp;
 
 import android.app.Activity;
+
 import androidx.test.rule.ActivityTestRule;
 
 
