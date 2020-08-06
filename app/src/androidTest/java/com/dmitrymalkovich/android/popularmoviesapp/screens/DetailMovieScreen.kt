@@ -10,7 +10,7 @@ import com.agoda.kakao.text.KTextView
 import com.dmitrymalkovich.android.popularmoviesapp.R
 import org.hamcrest.Matcher
 
-object DetailMovieScreen : Screen<DetailMovieScreen>() {
+class DetailMovieScreen : Screen<DetailMovieScreen>() {
     val favoriteBotton = KButton{withId(R.id.button_mark_as_favorite)}
     val removeFavoriteBotton = KButton{withId(R.id.button_mark_as_favorite)}
     val watchButton = KButton{withId(R.id.button_watch_trailer)}
