@@ -10,7 +10,12 @@ import com.dmitrymalkovich.android.popularmoviesapp.R
 import org.hamcrest.Matcher
 
 object MainScreen : Screen<MainScreen>() {
-    val actionMenu = KView { withId(R.id.menu_sort_by) }
+    val titleApp = KTextView { withText("Popular Movies") }
+    val actionMenu = KView { withContentDescription(R.string.sort_by) }
+    val mostPopular = KView { withText(R.string.most_popular) }
+    val topRated = KView { withText(R.string.top_rated) }
+    val favorites = KView { withText(R.string.favorites) }
+
     val recyclerMainScreen: KRecyclerView = KRecyclerView({
         withId(R.id.movie_list)
     }, itemTypeBuilder = {
