@@ -26,21 +26,11 @@ object DetailMovieScreen : Screen<DetailMovieScreen>() {
     val dateRelease = KTextView { withId(R.id.movie_release_date) }
     val movieOverview = KTextView { withId(R.id.movie_overview) }
 
-
     val trailerRecycler: KRecyclerView = KRecyclerView({
-        withId(R.id.trailer_list)
-    }, itemTypeBuilder = {
-        itemType(MainScreen::Item)
-    })
-
-
-    val recyclerTrailer: KRecyclerView = KRecyclerView({
         withId(R.id.trailer_list)
     }, itemTypeBuilder = {
         itemType(::Item)
     })
 
-    class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent) {
-        val title = KTextView(parent) { withId(R.id.title) }
-    }
+    class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent)
 }

@@ -55,16 +55,14 @@ class AppScreensTest : TestCase() {
     fun thumbnailTest() {
         MainScreen {
             recyclerMainScreen {
-
                 scrollTo(0)
                 childAt<Item>(0) {
                     isDisplayed()
                     click()
                     detailMovieScreenTest()
                 }
-
-                scrollTo(2)
-                childAt<Item>(2) {
+                scrollTo(7)
+                childAt<Item>(5) {
                     isDisplayed()
                     click()
                     detailMovieScreenTest()
@@ -73,9 +71,7 @@ class AppScreensTest : TestCase() {
         }
     }
 
-
     private fun detailMovieScreenTest() {
-
         DetailMovieScreen {
             movieBackDrop {
                 isDisplayed()
@@ -92,7 +88,7 @@ class AppScreensTest : TestCase() {
             moviePoster {
                 isDisplayed()
             }
-            movieTitle{
+            movieTitle {
                 isDisplayed()
             }
             watchTrailerButton {

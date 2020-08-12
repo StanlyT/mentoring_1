@@ -22,7 +22,5 @@ object MainScreen : Screen<MainScreen>() {
         itemType(::Item)
     })
 
-    class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent) {
-        val title = KTextView(parent) { withId(R.id.title) }
-    }
+    class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent)
 }
