@@ -23,4 +23,26 @@ object MainScreen : Screen<MainScreen>() {
     })
 
     class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent)
+
+    fun isScreenDisplayed() {
+        titleApp {
+            isDisplayed()
+        }
+        recyclerMainScreen {
+            isDisplayed()
+        }
+        actionMenu {
+            isDisplayed()
+            click()
+        }
+        mostPopular {
+            isDisplayed()
+        }
+        topRated {
+            isDisplayed()
+        }
+        favorites {
+            isDisplayed()
+        }
+    }
 }

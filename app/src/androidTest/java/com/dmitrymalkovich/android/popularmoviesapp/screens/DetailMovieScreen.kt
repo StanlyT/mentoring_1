@@ -33,4 +33,44 @@ object DetailMovieScreen : Screen<DetailMovieScreen>() {
     })
 
     class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent)
+
+    fun isScreenDisplayed() {
+        movieBackDrop {
+            isDisplayed()
+        }
+        favoriteBotton {
+            isDisplayed()
+        }
+        shareWithButton {
+            isDisplayed()
+        }
+        movieRating {
+            isDisplayed()
+        }
+        moviePoster {
+            isDisplayed()
+        }
+        movieTitle {
+            isDisplayed()
+        }
+        watchTrailerButton {
+            isDisplayed()
+        }
+        movieUserRating {
+            isDisplayed()
+        }
+        dateRelease {
+            isDisplayed()
+        }
+        movieOverview {
+            isDisplayed()
+        }
+        trailerRecycler {
+            isDisplayed()
+        }
+        upButton {
+            isDisplayed()
+            click()
+        }
+    }
 }
