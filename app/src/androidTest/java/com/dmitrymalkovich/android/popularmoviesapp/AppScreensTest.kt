@@ -4,7 +4,9 @@ package com.dmitrymalkovich.android.popularmoviesapp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
+import com.dmitrymalkovich.android.popularmoviesapp.screens.DetailMovieScreen
 import com.dmitrymalkovich.android.popularmoviesapp.screens.MainScreen
+import com.dmitrymalkovich.android.popularmoviesapp.screens.MainScreen.Item
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
@@ -21,7 +23,31 @@ class AppScreensTest : TestCase() {
     @Test
     fun mainScreenTest() {
         MainScreen {
-            recyclerMainScreen.isDisplayed()
+            isScreenDisplayed()
+
+            recyclerMainScreen {
+                firstChild<Item> {
+                    isDisplayed()
+                    click()
+                    detailMovieScreenTest()
+                }
+                scrollTo(7)
+                childAt<Item>(5) {
+                    isDisplayed()
+                    click()
+                    detailMovieScreenTest()
+                }
+            }
+        }
+    }
+
+    private fun detailMovieScreenTest() {
+        DetailMovieScreen {
+            isScreenDisplayed()
         }
     }
 }
+
+
+
+
