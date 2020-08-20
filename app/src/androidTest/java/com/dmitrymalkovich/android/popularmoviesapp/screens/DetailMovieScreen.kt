@@ -12,14 +12,18 @@ import com.dmitrymalkovich.android.popularmoviesapp.R
 import org.hamcrest.Matcher
 
 object DetailMovieScreen : Screen<DetailMovieScreen>() {
-    val favoriteBotton = KButton { withId(R.id.button_mark_as_favorite) }
-    val upButton = KButton { withContentDescription("Перейти вверх") }
+    val favoriteButton = KButton { withId(R.id.button_mark_as_favorite) }
+
+    //val upButton = KButton { withContentDescription("Перейти вверх") }
+    val upButton = KButton { withContentDescription("Navigate up") }
     val removeFavoriteButton = KButton { withId(R.id.button_remove_from_favorites) }
     val watchTrailerButton = KButton { withId(R.id.button_watch_trailer) }
     val trailerThumbnail = KView { withId(R.id.trailer_thumbnail) }
     val movieBackDrop = KImageView { withId(R.id.movie_backdrop) }
+
+    //val moviePoster = KImageView { withId(R.id.movie_poster) }
     val moviePoster = KImageView { withId(R.id.movie_poster) }
-    val shareWithButton = KImageView { withContentDescription("Поделиться с помощью") }
+    val shareWithButton = KImageView { withContentDescription("Share with") }
     val movieTitle = KTextView { withId(R.id.movie_title) }
     val movieRating = KView { withId(R.id.movie_rating) }
     val movieUserRating = KTextView { withId(R.id.movie_user_rating) }
@@ -29,16 +33,16 @@ object DetailMovieScreen : Screen<DetailMovieScreen>() {
     val trailerRecycler: KRecyclerView = KRecyclerView({
         withId(R.id.trailer_list)
     }, itemTypeBuilder = {
-        itemType(::Item)
+        itemType(::TrailerItem)
     })
 
-    class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent)
+    class TrailerItem(parent: Matcher<View>) : KRecyclerItem<TrailerItem>(parent)
 
     fun isScreenDisplayed() {
         movieBackDrop {
             isDisplayed()
         }
-        favoriteBotton {
+        favoriteButton {
             isDisplayed()
         }
         shareWithButton {
