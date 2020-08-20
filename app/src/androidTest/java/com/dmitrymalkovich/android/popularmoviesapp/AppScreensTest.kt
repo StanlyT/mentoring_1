@@ -141,13 +141,13 @@ class AppScreensTest : TestCase() {
     }
 
     @Test
-    fun checkAddToFavorites() { // пункт 2.5
+    fun testAddToFavorites() { // пункт 2.5
         var title = ""
         MainScreen {
 
             recyclerMainScreen {
                 swipeUp()
-                scrollTo(7)
+                scrollTo(5)
                 childAt<MainScreen.MainItem>(5) {
                     click()
                     DetailMovieScreen {
@@ -196,7 +196,7 @@ class AppScreensTest : TestCase() {
     }
 
     @Test
-    fun checkOffline() {  // пункт 2.5
+    fun testOffline() {  // пункт 2.5
         toggleAirMode()
 
         with(rule) {
@@ -227,6 +227,58 @@ class AppScreensTest : TestCase() {
         uiDevice.pressBack()
         uiDevice.pressBack()
         uiDevice.pressBack()
+    }
+
+    @Test
+    fun testSavedFavOffline() {
+        // пункт 2.5
+        var title = ""
+        MainScreen {
+
+            recyclerMainScreen {
+                firstChild<MainScreen.MainItem> {
+                    click()
+                    DetailMovieScreen {
+                        title = movieTitle.toString()
+
+                        favoriteButton {
+                            click()
+                        }
+                    }
+                }
+            }
+        }
+        toggleAirMode()
+
+        with(rule) {
+            finishActivity()
+            launchActivity(null)
+        }
+
+        MainScreen {
+            actionMenu {
+                click()
+            }
+            favorites {
+                click()
+            }
+            recyclerMainScreen {
+                firstChild<MainScreen.MainItem> {
+                    click()
+                    DetailMovieScreen {
+                        title == movieTitle.toString()
+                        removeFavoriteButton {
+                            click()
+                        }
+                        upButton {
+                            click()
+                        }
+                    }
+                }
+                getSize() == 0
+            }
+        }
+        toggleAirMode()
     }
 }
 
