@@ -1,6 +1,7 @@
 package com.dmitrymalkovich.android.popularmoviesapp.screens
 
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageButton
 import com.agoda.kakao.common.views.KView
 import com.agoda.kakao.image.KImageView
 import com.agoda.kakao.recycler.KRecyclerItem
@@ -9,17 +10,20 @@ import com.agoda.kakao.screen.Screen
 import com.agoda.kakao.text.KButton
 import com.agoda.kakao.text.KTextView
 import com.dmitrymalkovich.android.popularmoviesapp.R
+import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.Matcher
+
 
 object DetailMovieScreen : Screen<DetailMovieScreen>() {
     val favoriteButton = KButton { withId(R.id.button_mark_as_favorite) }
-    //val upButton = KButton { withContentDescription("Перейти вверх") }
-    val upButton = KButton { withContentDescription("Navigate up") }
+    val upButton = KButton {
+        withMatcher(instanceOf(AppCompatImageButton::class.java))
+        withParent { R.id.detail_toolbar }
+    }
     val removeFavoriteButton = KButton { withId(R.id.button_remove_from_favorites) }
     val watchTrailerButton = KButton { withId(R.id.button_watch_trailer) }
     val trailerThumbnail = KView { withId(R.id.trailer_thumbnail) }
     val movieBackDrop = KImageView { withId(R.id.movie_backdrop) }
-    //val moviePoster = KImageView { withId(R.id.movie_poster) }
     val moviePoster = KImageView { withId(R.id.movie_poster) }
     val shareWithButton = KImageView { withContentDescription("Share with") }
     val movieTitle = KTextView { withId(R.id.movie_title) }
@@ -72,7 +76,6 @@ object DetailMovieScreen : Screen<DetailMovieScreen>() {
         }
         upButton {
             isDisplayed()
-            click()
         }
     }
 }

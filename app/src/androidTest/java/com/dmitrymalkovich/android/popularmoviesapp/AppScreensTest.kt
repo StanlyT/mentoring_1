@@ -1,14 +1,13 @@
 package com.dmitrymalkovich.android.popularmoviesapp
 
 
-import androidx.appcompat.widget.ShareActionProvider
 import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
-import com.agoda.kakao.intent.KIntent
+import androidx.test.uiautomator.UiSelector
 import com.dmitrymalkovich.android.popularmoviesapp.screens.DetailMovieScreen
 import com.dmitrymalkovich.android.popularmoviesapp.screens.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -33,139 +32,147 @@ class AppScreensTest : TestCase() {
     var rule = IntentsTestRule(MovieListActivity::class.java, true)
 
     @Test
-    fun mainScreenTest() {
+    fun should_show_main_screen_and_detail_screen_after_pressed_some_items() {
         MainScreen {
             isScreenDisplayed()
-
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
                     isDisplayed()
                     click()
-                    detailMovieScreenTest()
                 }
+            }
+        }
+
+        detailMovieScreenDisplayTestAndBack()
+
+        MainScreen {
+            recyclerMainScreen {
                 swipeUp()
                 scrollTo(5)
                 childAt<MainScreen.MainItem>(5) {
                     isDisplayed()
                     click()
-                    detailMovieScreenTest()
                 }
+            }
+        }
+
+        detailMovieScreenDisplayTestAndBack()
+
+    }
+
+    private fun detailMovieScreenDisplayTestAndBack() {
+        DetailMovieScreen {
+            isScreenDisplayed()
+            upButton {
+                click()
             }
         }
     }
 
-    private fun detailMovieScreenTest() {
-        DetailMovieScreen {
+    @Test
+    fun should_show_previous_screen_if_up_button_was_pressed() { // пункт 2.1
+        MainScreen {
+            recyclerMainScreen {
+                firstChild<MainScreen.MainItem> {
+                    click()
+                }
+            }
+        }
+
+        detailMovieScreenDisplayTestAndBack()
+
+        MainScreen {
             isScreenDisplayed()
         }
     }
 
     @Test
-    fun testFirstChildAndBack() { // пункт 2.1
-        MainScreen {
-            recyclerMainScreen {
-                firstChild<MainScreen.MainItem> {
-                    click()
-                    DetailMovieScreen {
-                        upButton {
-                            click()
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @Test
-    fun testIsFavoriteButtonClickable() { // пункт 2.2
+    fun add_to_favorite_button_should_change_its_state_on_click() { // пункт 2.2
         MainScreen {
             recyclerMainScreen {
                 childAt<MainScreen.MainItem>(3) {
                     click()
-                    DetailMovieScreen {
-                        favoriteButton {
-                            click()
-                        }
-                        removeFavoriteButton {
-                            isDisplayed()
-                            click()
-                        }
-                    }
                 }
+            }
+        }
+        DetailMovieScreen {
+            favoriteButton {
+                click()
+            }
+            removeFavoriteButton {
+                isDisplayed()
+                click()
             }
         }
     }
 
     @Test
-    fun testWatchTrailer() {  // пункт 2.3
+    fun should_display_trailer_on_youtube() {  // пункт 2.3
+        val trailerImage = uiDevice.findObject(UiSelector().resourceId("com.google.android.youtube:id/player_overlays"))
         MainScreen {
             recyclerMainScreen {
                 swipeUp()
                 scrollTo(6)
                 childAt<MainScreen.MainItem>(6) {
                     click()
-                    DetailMovieScreen {
-                        watchTrailerButton {
-                            click()
-                            KIntent {
-                                hasAction("http://www.youtube.com/watch?v=")
-                            }
-                        }
-                    }
                 }
+            }
+        }
+        DetailMovieScreen {
+            watchTrailerButton {
+                click()
+                trailerImage.exists()
             }
         }
     }
 
     @Test
-    fun testShareVariants() { // пункт 2.4
+    fun should_display_chooser_listview() { // пункт 2.4
+        val appChooser = uiDevice.findObject(UiSelector().descriptionContains("Choose an app"))
         MainScreen {
             recyclerMainScreen {
                 swipeUp()
                 scrollToEnd()
                 lastChild<MainScreen.MainItem> {
                     click()
-
-                    DetailMovieScreen {
-                        shareWithButton {
-                            click()
-
-                            KIntent {
-                                hasComponent(ShareActionProvider::class.java.name)
-                            }
-                        }
-                    }
                 }
+            }
+        }
+        DetailMovieScreen {
+            shareWithButton {
+                click()
+                appChooser.exists()
             }
         }
     }
 
     @Test
-    fun testAddToFavorites() { // пункт 2.5
+    fun should_add_movie_to_favorites_and_then_remove_it_from_there() { // пункт 2.5
         var title = ""
         MainScreen {
-
             recyclerMainScreen {
                 swipeUp()
                 scrollTo(5)
                 childAt<MainScreen.MainItem>(5) {
                     click()
-                    DetailMovieScreen {
-                        title = movieTitle.toString()
-
-                        favoriteButton {
-                            click()
-                        }
-                        removeFavoriteButton {
-                            isDisplayed()
-                        }
-                    }
-                    DetailMovieScreen {
-                        upButton {
-                            click()
-                        }
-                    }
                 }
+            }
+        }
+        DetailMovieScreen {
+            title = movieTitle.toString()
+
+            favoriteButton {
+                click()
+            }
+            removeFavoriteButton {
+                isDisplayed()
+            }
+            upButton {
+                click()
+            }
+        }
+        MainScreen {
+            recyclerMainScreen {
                 swipeDown()
             }
             actionMenu {
@@ -177,32 +184,33 @@ class AppScreensTest : TestCase() {
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
                     click()
-                    DetailMovieScreen {
-                        title == movieTitle.toString()
-                        removeFavoriteButton {
-                            click()
-                        }
-                        favoriteButton {
-                            isDisplayed()
-                        }
-                        upButton {
-                            click()
-                        }
-                    }
                 }
+            }
+        }
+        DetailMovieScreen {
+            title == movieTitle.toString()
+            removeFavoriteButton {
+                click()
+            }
+            favoriteButton {
+                isDisplayed()
+            }
+            upButton {
+                click()
+            }
+        }
+        MainScreen {
+            recyclerMainScreen {
                 getSize() == 0
             }
         }
     }
 
     @Test
-    fun testOffline() {  // пункт 2.5
+    fun should_display_offline_mode_screen() {  // пункт 2.5
         toggleAirMode()
 
-        with(rule) {
-            finishActivity()
-            launchActivity(null)
-        }
+        restartApp()
 
         MainScreen {
             titleApp {
@@ -230,30 +238,27 @@ class AppScreensTest : TestCase() {
     }
 
     @Test
-    fun testSavedFavOffline() {
+    fun should_display_favorite_list_of_movies_in_offline_mode() {
         // пункт 2.5
         var title = ""
         MainScreen {
-
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
                     click()
-                    DetailMovieScreen {
-                        title = movieTitle.toString()
-
-                        favoriteButton {
-                            click()
-                        }
-                    }
                 }
             }
         }
+
+        DetailMovieScreen {
+            title = movieTitle.toString()
+            favoriteButton {
+                click()
+            }
+        }
+
         toggleAirMode()
 
-        with(rule) {
-            finishActivity()
-            launchActivity(null)
-        }
+        restartApp()
 
         MainScreen {
             actionMenu {
@@ -265,20 +270,32 @@ class AppScreensTest : TestCase() {
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
                     click()
-                    DetailMovieScreen {
-                        title == movieTitle.toString()
-                        removeFavoriteButton {
-                            click()
-                        }
-                        upButton {
-                            click()
-                        }
-                    }
                 }
+            }
+        }
+        DetailMovieScreen {
+            title == movieTitle.toString()
+            removeFavoriteButton {
+                click()
+            }
+            upButton {
+                click()
+            }
+        }
+        MainScreen {
+            recyclerMainScreen {
                 getSize() == 0
             }
         }
+
         toggleAirMode()
+    }
+
+    private fun restartApp() {
+        with(rule) {
+            finishActivity()
+            launchActivity(null)
+        }
     }
 }
 
