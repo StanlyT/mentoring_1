@@ -5,12 +5,12 @@ import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
-import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiSelector
 import com.dmitrymalkovich.android.popularmoviesapp.screens.DetailMovieScreen
 import com.dmitrymalkovich.android.popularmoviesapp.screens.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -25,6 +25,16 @@ class AppScreensTest : TestCase() {
     @Before
     fun wakeUpDevice() {
         uiDevice.wakeUp()
+//        with(rule) {
+//            launchActivity(null)
+//        }
+    }
+
+    @After
+    fun closeApp(){
+        with(rule) {
+            finishActivity()
+        }
     }
 
     @Rule
@@ -34,7 +44,19 @@ class AppScreensTest : TestCase() {
     @Test
     fun should_show_main_screen_and_detail_screen_after_pressed_some_items() {
         MainScreen {
+
             isScreenDisplayed()
+
+            actionMenu{
+                click()
+            }
+
+            isActionMenuItemDisplayed()
+
+            mostPopular {
+                click()
+            }
+
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
                     isDisplayed()
@@ -43,7 +65,7 @@ class AppScreensTest : TestCase() {
             }
         }
 
-        detailMovieScreenDisplayTestAndBack()
+        testDisplayDetailMovieScreenAndReturnBack()
 
         MainScreen {
             recyclerMainScreen {
@@ -56,11 +78,11 @@ class AppScreensTest : TestCase() {
             }
         }
 
-        detailMovieScreenDisplayTestAndBack()
+        testDisplayDetailMovieScreenAndReturnBack()
 
     }
 
-    private fun detailMovieScreenDisplayTestAndBack() {
+    private fun testDisplayDetailMovieScreenAndReturnBack() {
         DetailMovieScreen {
             isScreenDisplayed()
             upButton {
@@ -79,7 +101,7 @@ class AppScreensTest : TestCase() {
             }
         }
 
-        detailMovieScreenDisplayTestAndBack()
+        testDisplayDetailMovieScreenAndReturnBack()
 
         MainScreen {
             isScreenDisplayed()
@@ -203,98 +225,6 @@ class AppScreensTest : TestCase() {
             recyclerMainScreen {
                 getSize() == 0
             }
-        }
-    }
-
-    @Test
-    fun should_display_offline_mode_screen() {  // пункт 2.5
-        toggleAirMode()
-
-        restartApp()
-
-        MainScreen {
-            titleApp {
-                isDisplayed()
-            }
-            emptyImage {
-                isDisplayed()
-            }
-            emptyStateConnection {
-                isDisplayed()
-            }
-            textEmptyView {
-                isDisplayed()
-            }
-        }
-        toggleAirMode()
-    }
-
-    private fun toggleAirMode() {
-        uiDevice.openQuickSettings()
-        uiDevice.findObject(By.desc("Airplane mode")).click()
-        uiDevice.pressBack()
-        uiDevice.pressBack()
-        uiDevice.pressBack()
-    }
-
-    @Test
-    fun should_display_favorite_list_of_movies_in_offline_mode() {
-        // пункт 2.5
-        var title = ""
-        MainScreen {
-            recyclerMainScreen {
-                firstChild<MainScreen.MainItem> {
-                    click()
-                }
-            }
-        }
-
-        DetailMovieScreen {
-            title = movieTitle.toString()
-            favoriteButton {
-                click()
-            }
-        }
-
-        toggleAirMode()
-
-        restartApp()
-
-        MainScreen {
-            actionMenu {
-                click()
-            }
-            favorites {
-                click()
-            }
-            recyclerMainScreen {
-                firstChild<MainScreen.MainItem> {
-                    click()
-                }
-            }
-        }
-        DetailMovieScreen {
-            title == movieTitle.toString()
-            removeFavoriteButton {
-                click()
-            }
-            upButton {
-                click()
-            }
-        }
-        MainScreen {
-            recyclerMainScreen {
-                getSize() == 0
-            }
-        }
-
-        toggleAirMode()
-    }
-
-    private fun restartApp() {
-        with(rule) {
-            finishActivity()
-            launchActivity(null)
         }
     }
 }

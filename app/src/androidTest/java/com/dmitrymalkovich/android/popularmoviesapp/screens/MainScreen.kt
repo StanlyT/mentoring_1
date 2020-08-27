@@ -41,8 +41,10 @@ object MainScreen : Screen<MainScreen>() {
         }
         actionMenu {
             isDisplayed()
-            click()
         }
+    }
+
+    fun isActionMenuItemDisplayed(){
         mostPopular {
             isDisplayed()
         }
@@ -51,9 +53,6 @@ object MainScreen : Screen<MainScreen>() {
         }
         favorites {
             isDisplayed()
-        }
-        mostPopular {
-            click()
         }
     }
 }
