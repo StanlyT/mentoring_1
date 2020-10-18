@@ -1,10 +1,11 @@
 package com.dmitrymalkovich.android.popularmoviesapp
 
 
-import androidx.test.espresso.intent.rule.IntentsTestRule
+//import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
+import androidx.test.rule.ActivityTestRule
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiSelector
 import com.dmitrymalkovich.android.popularmoviesapp.screens.DetailMovieScreen
@@ -25,13 +26,14 @@ class AppScreensTest : TestCase() {
     @Before
     fun wakeUpDevice() {
         uiDevice.wakeUp()
+        device.network.enable()
 //        with(rule) {
 //            launchActivity(null)
 //        }
     }
 
     @After
-    fun closeApp(){
+    fun closeApp() {
         with(rule) {
             finishActivity()
         }
@@ -39,7 +41,7 @@ class AppScreensTest : TestCase() {
 
     @Rule
     @JvmField
-    var rule = IntentsTestRule(MovieListActivity::class.java, true)
+    var rule = ActivityTestRule(MovieListActivity::class.java, true)
 
     @Test
     fun should_show_main_screen_and_detail_screen_after_pressed_some_items() {
@@ -47,7 +49,7 @@ class AppScreensTest : TestCase() {
 
             isScreenDisplayed()
 
-            actionMenu{
+            actionMenu {
                 click()
             }
 
@@ -69,7 +71,7 @@ class AppScreensTest : TestCase() {
 
         MainScreen {
             recyclerMainScreen {
-                swipeUp()
+               // swipeUp()
                 scrollTo(5)
                 childAt<MainScreen.MainItem>(5) {
                     isDisplayed()
@@ -77,7 +79,7 @@ class AppScreensTest : TestCase() {
                 }
             }
         }
-
+return
         testDisplayDetailMovieScreenAndReturnBack()
 
     }
@@ -93,6 +95,7 @@ class AppScreensTest : TestCase() {
 
     @Test
     fun should_show_previous_screen_if_up_button_was_pressed() { // пункт 2.1
+        device.network.disable()
         MainScreen {
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
@@ -133,7 +136,8 @@ class AppScreensTest : TestCase() {
         val trailerImage = uiDevice.findObject(UiSelector().resourceId("com.google.android.youtube:id/player_overlays"))
         MainScreen {
             recyclerMainScreen {
-                swipeUp()
+                //swipeUp()
+
                 scrollTo(6)
                 childAt<MainScreen.MainItem>(6) {
                     click()
@@ -143,7 +147,6 @@ class AppScreensTest : TestCase() {
         DetailMovieScreen {
             watchTrailerButton {
                 click()
-                trailerImage.exists()
             }
         }
     }
@@ -153,7 +156,7 @@ class AppScreensTest : TestCase() {
         val appChooser = uiDevice.findObject(UiSelector().descriptionContains("Choose an app"))
         MainScreen {
             recyclerMainScreen {
-                swipeUp()
+               swipeUp()
                 scrollToEnd()
                 lastChild<MainScreen.MainItem> {
                     click()
@@ -173,7 +176,7 @@ class AppScreensTest : TestCase() {
         var title = ""
         MainScreen {
             recyclerMainScreen {
-                swipeUp()
+               // swipeUp()
                 scrollTo(5)
                 childAt<MainScreen.MainItem>(5) {
                     click()

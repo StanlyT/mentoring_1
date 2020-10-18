@@ -60,6 +60,7 @@ public class FetchMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
     private final NotifyAboutTaskCompletionCommand mCommand;
     private
     @SORT_BY
+    final
     String mSortBy;
 
     /**
@@ -78,7 +79,7 @@ public class FetchMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
      * It helps save calls which we cannot execute immediately for later.
      */
     public static class NotifyAboutTaskCompletionCommand implements Command {
-        private FetchMoviesTask.Listener mListener;
+        private final FetchMoviesTask.Listener mListener;
         // The result of the task execution.
         private List<Movie> mMovies;
 

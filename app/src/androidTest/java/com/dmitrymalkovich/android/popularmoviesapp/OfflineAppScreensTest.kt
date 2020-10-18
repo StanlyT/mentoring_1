@@ -1,9 +1,12 @@
 package com.dmitrymalkovich.android.popularmoviesapp
 
-import androidx.test.espresso.intent.rule.IntentsTestRule
+//import androidx.test.espresso.intent.rule.IntentsTestRule
+//import androidx.test.espresso.intent.rule.IntentsTestRule
+//import org.junit.rules.TestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import com.dmitrymalkovich.android.popularmoviesapp.screens.DetailMovieScreen
@@ -36,7 +39,7 @@ class OfflineAppScreensTest : TestCase() {
 
     @Rule
     @JvmField
-    var rule = IntentsTestRule(MovieListActivity::class.java, true)
+    var rule = ActivityTestRule(MovieListActivity::class.java, true)
 
 
     @Test

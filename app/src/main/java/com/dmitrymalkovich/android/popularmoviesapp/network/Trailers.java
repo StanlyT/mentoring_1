@@ -24,7 +24,7 @@ import java.util.List;
 public class Trailers {
 
     @SerializedName("results")
-    private List<Trailer> trailers = new ArrayList<>();
+    private final List<Trailer> trailers = new ArrayList<>();
 
     public List<Trailer> getTrailers() {
         return trailers;

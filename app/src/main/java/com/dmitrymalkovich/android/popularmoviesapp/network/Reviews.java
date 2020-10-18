@@ -24,7 +24,7 @@ import java.util.List;
 public class Reviews {
 
     @SerializedName("results")
-    private List<Review> reviews = new ArrayList<>();
+    private final List<Review> reviews = new ArrayList<>();
 
     public List<Review> getReviews() {
         return reviews;

@@ -24,12 +24,14 @@ import android.view.MenuItem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-//
+
 import com.dmitrymalkovich.android.popularmoviesapp.MovieListActivity;
 import com.dmitrymalkovich.android.popularmoviesapp.R;
-import butterknife.ButterKnife;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+
+//
 
 
 /**

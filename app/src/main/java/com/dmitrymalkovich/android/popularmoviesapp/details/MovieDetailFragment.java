@@ -16,21 +16,11 @@
 
 package com.dmitrymalkovich.android.popularmoviesapp.details;
 
-import com.dmitrymalkovich.android.popularmoviesapp.data.MovieContract;
-import com.dmitrymalkovich.android.popularmoviesapp.network.*;
-import com.dmitrymalkovich.android.popularmoviesapp.MovieListActivity;
-import com.dmitrymalkovich.android.popularmoviesapp.R;
-
-import com.squareup.picasso.Picasso;
-
-
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-
-
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -51,12 +41,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+import com.dmitrymalkovich.android.popularmoviesapp.MovieListActivity;
+import com.dmitrymalkovich.android.popularmoviesapp.R;
+import com.dmitrymalkovich.android.popularmoviesapp.data.MovieContract;
+import com.dmitrymalkovich.android.popularmoviesapp.network.Movie;
+import com.dmitrymalkovich.android.popularmoviesapp.network.Review;
+import com.dmitrymalkovich.android.popularmoviesapp.network.Trailer;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -130,13 +125,12 @@ public class MovieDetailFragment extends Fragment implements FetchTrailersTask.L
         super.onActivityCreated(savedInstanceState);
 
         Activity activity = getActivity();
-        CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout)
-                activity.findViewById(R.id.toolbar_layout);
+        CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
         if (appBarLayout != null && activity instanceof MovieDetailActivity) {
             appBarLayout.setTitle(mMovie.getTitle());
         }
 
-        ImageView movieBackdrop = ((ImageView) activity.findViewById(R.id.movie_backdrop));
+        ImageView movieBackdrop = activity.findViewById(R.id.movie_backdrop);
         if (movieBackdrop != null) {
             Picasso.with(activity)
                     .load(mMovie.getBackdropUrl(getContext()))
