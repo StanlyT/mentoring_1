@@ -41,41 +41,17 @@ object DetailMovieScreen : Screen<DetailMovieScreen>() {
     class TrailerItem(parent: Matcher<View>) : KRecyclerItem<TrailerItem>(parent)
 
     fun isScreenDisplayed() {
-        movieBackDrop {
-            isDisplayed()
-        }
-        favoriteButton {
-            isDisplayed()
-        }
-        shareWithButton {
-            isDisplayed()
-        }
-        movieRating {
-            isDisplayed()
-        }
-        moviePoster {
-            isDisplayed()
-        }
-        movieTitle {
-            isDisplayed()
-        }
-        watchTrailerButton {
-            isDisplayed()
-        }
-        movieUserRating {
-            isDisplayed()
-        }
-        dateRelease {
-            isDisplayed()
-        }
-        movieOverview {
-            isDisplayed()
-        }
-        trailerRecycler {
-            isDisplayed()
-        }
-        upButton {
-            isDisplayed()
-        }
+        movieBackDrop.isDisplayed()
+        favoriteButton.isDisplayed()
+        shareWithButton.isDisplayed()
+        movieRating.isDisplayed()
+        moviePoster.isDisplayed()
+        movieTitle.isDisplayed()
+        watchTrailerButton.isDisplayed()
+        movieUserRating.isDisplayed()
+        dateRelease.isDisplayed()
+        movieOverview.isDisplayed()
+        trailerRecycler.isDisplayed()
+        upButton.isDisplayed()
     }
 }

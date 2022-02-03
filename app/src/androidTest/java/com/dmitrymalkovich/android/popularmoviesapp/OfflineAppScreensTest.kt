@@ -1,8 +1,5 @@
 package com.dmitrymalkovich.android.popularmoviesapp
 
-//import androidx.test.espresso.intent.rule.IntentsTestRule
-//import androidx.test.espresso.intent.rule.IntentsTestRule
-//import org.junit.rules.TestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
@@ -49,39 +46,30 @@ class OfflineAppScreensTest : TestCase() {
         restartApp()
 
         MainScreen {
-            titleApp {
-                isDisplayed()
-            }
-            emptyImage {
-                isDisplayed()
-            }
-            emptyStateConnection {
-                isDisplayed()
-            }
-            textEmptyView {
-                isDisplayed()
-            }
+            titleApp.isDisplayed()
+            emptyImage.isDisplayed()
+            emptyStateConnection.isDisplayed()
+            textEmptyView.isDisplayed()
         }
         disableAirMode()
     }
 
     @Test
     fun should_display_favorite_list_of_movies_in_offline_mode() {
-        // пункт 2.5
         var title = ""
+
         MainScreen {
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
                     click()
-                }
+                    DetailMovieScreen.isScreenDisplayed()
+               }
             }
         }
 
         DetailMovieScreen {
             title = movieTitle.toString()
-            favoriteButton {
-                click()
-            }
+            favoriteButton.click()
         }
 
         enableAirMode()
@@ -89,12 +77,7 @@ class OfflineAppScreensTest : TestCase() {
         restartApp()
 
         MainScreen {
-            actionMenu {
-                click()
-            }
-            favorites {
-                click()
-            }
+            actionMenu.isDisplayed()
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
                     click()
@@ -103,12 +86,8 @@ class OfflineAppScreensTest : TestCase() {
         }
         DetailMovieScreen {
             title == movieTitle.toString()
-            removeFavoriteButton {
-                click()
-            }
-            upButton {
-                click()
-            }
+            removeFavoriteButton.click()
+            upButton.click()
         }
         MainScreen {
             recyclerMainScreen {

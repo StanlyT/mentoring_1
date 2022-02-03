@@ -26,10 +26,10 @@ class AppScreensTest : TestCase() {
     @Before
     fun wakeUpDevice() {
         uiDevice.wakeUp()
-        device.network.enable()
-//        with(rule) {
-//            launchActivity(null)
-//        }
+       // device.network.enable()
+        with(rule) {
+           launchActivity(null)
+        }
     }
 
     @After
@@ -46,19 +46,10 @@ class AppScreensTest : TestCase() {
     @Test
     fun should_show_main_screen_and_detail_screen_after_pressed_some_items() {
         MainScreen {
-
             isScreenDisplayed()
-
-            actionMenu {
-                click()
-            }
-
+            actionMenu.click()
             isActionMenuItemDisplayed()
-
-            mostPopular {
-                click()
-            }
-
+            mostPopular.click()
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
                     isDisplayed()
@@ -79,7 +70,7 @@ class AppScreensTest : TestCase() {
                 }
             }
         }
-return
+//return
         testDisplayDetailMovieScreenAndReturnBack()
 
     }
@@ -94,8 +85,8 @@ return
     }
 
     @Test
-    fun should_show_previous_screen_if_up_button_was_pressed() { // пункт 2.1
-        device.network.disable()
+    fun should_show_previous_screen_if_up_button_was_pressed() {
+        //device.network.disable()
         MainScreen {
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
@@ -112,7 +103,7 @@ return
     }
 
     @Test
-    fun add_to_favorite_button_should_change_its_state_on_click() { // пункт 2.2
+    fun add_to_favorite_button_should_change_its_state_on_click() {
         MainScreen {
             recyclerMainScreen {
                 childAt<MainScreen.MainItem>(3) {
@@ -136,8 +127,6 @@ return
         val trailerImage = uiDevice.findObject(UiSelector().resourceId("com.google.android.youtube:id/player_overlays"))
         MainScreen {
             recyclerMainScreen {
-                //swipeUp()
-
                 scrollTo(6)
                 childAt<MainScreen.MainItem>(6) {
                     click()
@@ -185,27 +174,17 @@ return
         }
         DetailMovieScreen {
             title = movieTitle.toString()
-
-            favoriteButton {
-                click()
-            }
-            removeFavoriteButton {
-                isDisplayed()
-            }
-            upButton {
-                click()
-            }
+            favoriteButton.click()
+            removeFavoriteButton.isDisplayed()
+            upButton.isDisplayed()
         }
         MainScreen {
             recyclerMainScreen {
                 swipeDown()
             }
-            actionMenu {
-                click()
-            }
-            favorites {
-                click()
-            }
+            actionMenu.isDisplayed()
+            favorites.isDisplayed()
+
             recyclerMainScreen {
                 firstChild<MainScreen.MainItem> {
                     click()
@@ -217,12 +196,8 @@ return
             removeFavoriteButton {
                 click()
             }
-            favoriteButton {
-                isDisplayed()
-            }
-            upButton {
-                click()
-            }
+            favoriteButton.isDisplayed()
+            upButton.click()
         }
         MainScreen {
             recyclerMainScreen {

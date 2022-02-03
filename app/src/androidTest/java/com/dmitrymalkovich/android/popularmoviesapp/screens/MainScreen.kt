@@ -12,7 +12,8 @@ import org.hamcrest.Matcher
 
 object MainScreen : Screen<MainScreen>() {
     val titleApp = KTextView { withText("Popular Movies") }
-    val actionMenu = KView { withContentDescription(R.string.sort_by) }
+    val actionMenu = KView { withContentDescription(R.string.sort_by)
+    }
     val mostPopular = KView { withText(R.string.most_popular) }
     val topRated = KView { withText(R.string.top_rated) }
     val favorites = KView { withText(R.string.favorites) }
@@ -30,29 +31,15 @@ object MainScreen : Screen<MainScreen>() {
     class MainItem(parent: Matcher<View>) : KRecyclerItem<MainItem>(parent)
 
     fun isScreenDisplayed() {
-        appbar {
-            isDisplayed()
-        }
-        titleApp {
-            isDisplayed()
-        }
-        recyclerMainScreen {
-            isDisplayed()
-        }
-        actionMenu {
-            isDisplayed()
-        }
+        appbar.isDisplayed()
+        titleApp.isDisplayed()
+        recyclerMainScreen.isDisplayed()
+        actionMenu.isDisplayed()
     }
 
     fun isActionMenuItemDisplayed(){
-        mostPopular {
-            isDisplayed()
-        }
-        topRated {
-            isDisplayed()
-        }
-        favorites {
-            isDisplayed()
-        }
+        mostPopular.isDisplayed()
+        topRated.isDisplayed()
+        favorites.isDisplayed()
     }
 }
